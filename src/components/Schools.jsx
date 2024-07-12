@@ -23,12 +23,12 @@ export default function Schools() {
         findSchools();
     }, []);
 
-    // ******************************************** addSchool adds a new school ************************************************* //
-    async function createSchool(apiURL) {
+    // ******************************************** createSchool adds a new school ************************************************* //
+    async function createSchool(nameOfSchool, regionOfSchool) {
         try {
-            const results = await axios.post(`${apiURL}/create-school`, {
-                name: schoolName,
-                region: schoolRegion,
+            const results = await axios.post(`${baseURL}/create-school`, {
+                name: nameOfSchool,
+                region: regionOfSchool,
             });
             if (results.data) await findSchools();
         } catch (error) {
@@ -68,7 +68,7 @@ export default function Schools() {
             <AddSchool
                 onCreateSchoolHandler={(event) => {
                     event.preventDefault();
-                    createSchool(baseURL);
+                    createSchool(schoolName, schoolRegion);
                 }}
                 onSchoolNameHandler={schoolNameHandler}
                 onSchoolRegionHandler={schoolRegionHandler}
