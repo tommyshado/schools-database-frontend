@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ShowSchools } from "./ShowSchools";
-import { GetSchoolInputs } from "./GetSchoolInputs";
+import { RenderSchools } from "./RenderSchools";
+import { AddSchool } from "./AddSchool";
+import baseURL from "../utils/api";
+import { SearchForSchool } from "./SearchForSchool";
 
 export default function Schools() {
     const [foundSchools, setFoundSchools] = useState([]);
     const [schoolName, setSchoolName] = useState("");
     const [schoolRegion, setSchoolRegion] = useState("");
-    const baseURL = "https://schools-database.onrender.com/api";
 
+    // ******************************************** findSchools fetches all schools *********************************************** //
     async function findSchools() {
         try {
             const results = await axios.get(`${baseURL}/get-schools`);
@@ -21,10 +23,10 @@ export default function Schools() {
         findSchools();
     }, []);
 
-    async function createSchool(event) {
-        event.preventDefault();
+    // ******************************************** addSchool adds a new school ************************************************* //
+    async function createSchool(apiURL) {
         try {
-            const results = await axios.post(`${baseURL}/create-school`, {
+            const results = await axios.post(`${apiURL}/create-school`, {
                 name: schoolName,
                 region: schoolRegion,
             });
@@ -33,9 +35,6 @@ export default function Schools() {
             console.log("Error occurred while create a school", error);
         }
     }
-    useEffect(() => {
-        createSchool();
-    })
     async function schoolNameHandler(event) {
         setSchoolName(event.target.value);
     }
@@ -43,14 +42,46 @@ export default function Schools() {
         setSchoolRegion(event.target.value);
     }
 
+    // ************************************** findSchool searches for a specific school *************************************** //
+    async function findSchool(name, region) {
+        try {
+            const results = await axios.get(
+                `${baseURL}/school-search?school=${name}&region=${region}`
+            );
+            setFoundSchools(results.data);
+        } catch (error) {
+            console.log(
+                "Error occurred while fetching a school by name and region",
+                error
+            );
+        }
+    }
+    async function searchSchoolNameHandler(event) {
+        setSchoolName(event.target.value);
+    }
+    async function searchSchoolRegionHandler(event) {
+        setSchoolRegion(event.target.value);
+    }
+
     return (
         <>
-            <GetSchoolInputs
-                onCreateSchoolHandler={createSchool}
+            <AddSchool
+                onCreateSchoolHandler={(event) => {
+                    event.preventDefault();
+                    createSchool(baseURL);
+                }}
                 onSchoolNameHandler={schoolNameHandler}
                 onSchoolRegionHandler={schoolRegionHandler}
             />
-            <ShowSchools foundSchools={foundSchools} />
+            <SearchForSchool
+                onFindSchoolHandler={(event) => {
+                    event.preventDefault();
+                    findSchool(schoolName, schoolRegion);
+                }}
+                onNameHandler={searchSchoolNameHandler}
+                onRegionHandler={searchSchoolRegionHandler}
+            />
+            <RenderSchools foundSchools={foundSchools} />
         </>
     );
 }
