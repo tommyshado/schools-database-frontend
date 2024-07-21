@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { RenderSchools } from "./RenderSchools";
-import { AddSchool } from "./AddSchool";
+import { AddSchool } from "../routes/AddSchool";
 import baseURL from "../utils/api";
-import { SearchForSchool } from "./SearchForSchool";
+import { SearchForSchool } from "../routes/SearchForSchool";
 
 export default function Schools() {
     const [foundSchools, setFoundSchools] = useState([]);

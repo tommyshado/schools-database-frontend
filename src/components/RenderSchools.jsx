@@ -1,14 +1,13 @@
 export function RenderSchools({ foundSchools }) {
   return (
     <>
-      <table className="table caption-top">
-        <caption>List of schools</caption>
+      <table>
         <thead>
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Region</th>
-            <th scope="col">Learners available</th>
-            <th scope="col">Teachers available</th>
+            <th>Name</th>
+            <th>Region</th>
+            <th>Learners available</th>
+            <th>Teachers available</th>
           </tr>
         </thead>
         <tbody>
