@@ -9,6 +9,8 @@ export default function Schools() {
     const [foundSchools, setFoundSchools] = useState([]);
     const [schoolName, setSchoolName] = useState("");
     const [schoolRegion, setSchoolRegion] = useState("");
+    const [addName, setAddName] = useState("");
+    const [addRegion, setAddRegion] = useState("");
 
     // ******************************************** findSchools fetches all schools *********************************************** //
     async function findSchools() {
@@ -36,10 +38,10 @@ export default function Schools() {
         }
     }
     function schoolNameHandler(event) {
-        setSchoolName(event.target.value);
+        setAddName(event.target.value);
     }
     function schoolRegionHandler(event) {
-        setSchoolRegion(event.target.value);
+        setAddRegion(event.target.value);
     }
 
     // ************************************** findSchool searches for a specific school *************************************** //
@@ -63,27 +65,45 @@ export default function Schools() {
         setSchoolRegion(event.target.value);
     }
 
+    async function onCreateSchoolHandler(event) {
+        event.preventDefault();
+        await createSchool(addName, addRegion);
+        setAddName("");
+        setAddRegion("");
+    }
+
+    async function onFindSchoolHandler(event) {
+        event.preventDefault();
+        await findSchool(schoolName, schoolRegion);
+        if (foundSchools) {
+            setSchoolName("");
+            setSchoolRegion("");
+        }
+    }
+    
+    async function resetFoundSchools(event) {
+        event.preventDefault();
+        await findSchools();
+        setSchoolName("");
+        setSchoolRegion("");
+    }
+
     return (
         <>
             <AddSchool
-                onCreateSchoolHandler={(event) => {
-                    event.preventDefault();
-                    createSchool(schoolName, schoolRegion);
-                }}
                 onSchoolNameHandler={schoolNameHandler}
                 onSchoolRegionHandler={schoolRegionHandler}
+                nameValue={addName}
+                regionValue={addRegion}
+                onCreateSchoolHandler={onCreateSchoolHandler}
             />
             <SearchForSchool
-                onFindSchoolHandler={(event) => {
-                    event.preventDefault();
-                    findSchool(schoolName, schoolRegion);
-                }}
                 onNameHandler={searchSchoolNameHandler}
                 onRegionHandler={searchSchoolRegionHandler}
-                resetFoundSchools={(event) => {
-                    event.preventDefault();
-                    findSchools();
-                }}
+                nameValue={schoolName}
+                regionValue={schoolRegion}
+                onFindSchoolHandler={onFindSchoolHandler}
+                resetFoundSchools={resetFoundSchools}
             />
             <RenderSchools foundSchools={foundSchools} />
         </>

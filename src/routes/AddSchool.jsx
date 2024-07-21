@@ -4,6 +4,8 @@ export function AddSchool({
   onCreateSchoolHandler,
   onSchoolNameHandler,
   onSchoolRegionHandler,
+  nameValue,
+  regionValue,
 }) {
   return (
     <>
@@ -16,6 +18,7 @@ export function AddSchool({
             <span>Enter school name</span>
             <br />
             <input
+              value={nameValue}
               className="w-full p-2 border border-gray-300 rounded mb-4"
               type="text"
               name="name"
@@ -27,6 +30,7 @@ export function AddSchool({
             <span>Enter school region</span>
             <br />
             <input
+              value={regionValue}
               className="w-full p-2 border border-gray-300 rounded mb-4"
               type="text"
               name="region"

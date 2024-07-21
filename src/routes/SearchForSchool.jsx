@@ -6,12 +6,15 @@ export function SearchForSchool({
   onNameHandler,
   onRegionHandler,
   resetFoundSchools,
+  nameValue,
+  regionValue
 }) {
   return (
       <form onSubmit={onFindSchoolHandler}>
         <div className="flex space-x-4 justify-center items-center mb-4">
           <span>
             <input
+              value={nameValue}
               className="w-full p-2 border border-gray-300 rounded mb-4"
               type="text"
               name="name"
@@ -21,6 +24,7 @@ export function SearchForSchool({
           </span>
           <span>
             <input
+              value={regionValue}
               className="w-full p-2 border border-gray-300 rounded mb-4"
               type="text"
               name="region"
