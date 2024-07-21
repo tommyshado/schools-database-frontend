@@ -35,10 +35,10 @@ export default function Schools() {
             console.log("Error occurred while create a school", error);
         }
     }
-    async function schoolNameHandler(event) {
+    function schoolNameHandler(event) {
         setSchoolName(event.target.value);
     }
-    async function schoolRegionHandler(event) {
+    function schoolRegionHandler(event) {
         setSchoolRegion(event.target.value);
     }
 
@@ -56,10 +56,10 @@ export default function Schools() {
             );
         }
     }
-    async function searchSchoolNameHandler(event) {
+    function searchSchoolNameHandler(event) {
         setSchoolName(event.target.value);
     }
-    async function searchSchoolRegionHandler(event) {
+    function searchSchoolRegionHandler(event) {
         setSchoolRegion(event.target.value);
     }
 
@@ -80,6 +80,10 @@ export default function Schools() {
                 }}
                 onNameHandler={searchSchoolNameHandler}
                 onRegionHandler={searchSchoolRegionHandler}
+                resetFoundSchools={(event) => {
+                    event.preventDefault();
+                    findSchools();
+                }}
             />
             <RenderSchools foundSchools={foundSchools} />
         </>
