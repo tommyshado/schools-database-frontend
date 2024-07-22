@@ -15,7 +15,7 @@ export function SearchForSchool({
           <span>
             <input
               value={nameValue}
-              className="w-full p-2 border border-gray-300 rounded mb-4"
+              className="w-full p-2 border border-gray-300 rounded"
               type="text"
               name="name"
               onChange={onNameHandler}
@@ -25,7 +25,7 @@ export function SearchForSchool({
           <span>
             <input
               value={regionValue}
-              className="w-full p-2 border border-gray-300 rounded mb-4"
+              className="w-full p-2 border border-gray-300 rounded"
               type="text"
               name="region"
               onChange={onRegionHandler}
