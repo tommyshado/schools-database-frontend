@@ -34,7 +34,7 @@ export function SearchForSchool({
           </span>
           <span>
             <button
-              className="bg-gray-600 text-white p-2 rounded mb-4"
+              className="bg-gray-600 text-white p-2 rounded"
               type="submit"
             >
               Search

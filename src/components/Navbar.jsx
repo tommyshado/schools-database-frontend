@@ -8,7 +8,6 @@ export default function Navbar() {
         <div className="space-x-4">
           <Link to="/" className="text-white">Home</Link>
           <Link to="/add-school" className="text-white">Add School</Link>
-          <Link to="/search-for-school" className="text-white">Search</Link>
         </div>
       </div>
     </nav>
