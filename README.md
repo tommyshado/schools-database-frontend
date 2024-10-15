@@ -4,7 +4,8 @@ This is the front-end of the School Database Management System, built using Reac
 
 ## API Endpoint
 
-The API endpoint for this project is: https://schools-database.onrender.com/api
+* The Schools Database Backend API code is: ```https://github.com/tommyshado/schools_database```
+* The API endpoint for this project is: ```https://schools-database.onrender.com/api```
 
 ## Installation and Setup
 
